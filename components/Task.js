@@ -1,7 +1,17 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 
 const Task = (props) => {
+  const [description, setDescription] = useState('');
+  const [dueDate, setDueDate] = useState('');
+
+  const handleDescriptionChange = (text) => {
+    setDescription(text);
+  };
+
+  const handleDueDateChange = (text) => {
+    setDueDate(text);
+  };
 
   return (
     <View style={styles.item}>
@@ -10,6 +20,18 @@ const Task = (props) => {
         <View>
           <Text style={styles.itemText}>{props.text}</Text>
           {props.description && <Text style={styles.description}>{props.description}</Text>}
+          <TextInput
+            style={styles.descriptionInput}
+            placeholder="Enter description..."
+            value={description}
+            onChangeText={handleDescriptionChange}
+          />
+          <TextInput
+            style={styles.dueDateInput}
+            placeholder="Enter due date..."
+            value={dueDate}
+            onChangeText={handleDueDateChange}
+          />
         </View>
       </View>
       {/* Updated the circular view to show a cross mark */}
@@ -17,8 +39,8 @@ const Task = (props) => {
         <Text style={styles.crossMark}>X</Text>
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   item: {
@@ -33,7 +55,7 @@ const styles = StyleSheet.create({
   itemLeft: {
     flexDirection: 'row',
     alignItems: 'center',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   square: {
     width: 24,
@@ -49,6 +71,20 @@ const styles = StyleSheet.create({
   description: {
     color: '#808080',
     fontSize: 12,
+  },
+  descriptionInput: {
+    marginTop: 5,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+  },
+  dueDateInput: {
+    marginTop: 5,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
   },
   circular: {
     width: 24,
